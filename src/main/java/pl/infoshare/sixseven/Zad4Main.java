@@ -14,10 +14,10 @@ public class Zad4Main {
   public static void main(String[] args) throws IOException {
 
 
-      start();
+      Start();
   }
 
-    public static void start() throws IOException
+    public static void Start() throws IOException
     {
 
         printMenu();
@@ -40,7 +40,7 @@ public class Zad4Main {
         //Zapisz usera do pliku
         saveToFile(user);
         //Wypisz informacje o poprawnie wykonanej operacji
-          back();
+          Back();
 
         printSuccess();
 
@@ -61,13 +61,14 @@ public class Zad4Main {
 
       }
         case "0": {
-            System.out.println("Wybarałeś zakończenie programu?");
-
+            System.out.println("Wybarałeś zakończenie programu");
+            System.exit(0);
         }
 
       //Jesli uzytkownik wybierze cokolwiek innego
       default: {
         printError();
+          Start();
         break;
       }
     }
@@ -109,6 +110,7 @@ public class Zad4Main {
     System.out.println("========== MENU ==========");
     System.out.println("1.\t Dodaj uzytkownika.");
     System.out.println("2.\t Wyświetl uzytkowników.");
+    System.out.println("0.\t Koniec programu.");
     System.out.print("Wybor: ");
   }
 
@@ -119,7 +121,7 @@ public class Zad4Main {
   private static void printSuccess() throws IOException {
 
     System.out.println("\nDODANO POPRAWNIE!\n");
-      start();
+      Start();
 
   }
 
@@ -127,7 +129,8 @@ public class Zad4Main {
     Metoda do wypisywania informacji o zle wykonanej operacji
    */
   private static void printError() {
-    System.out.println("BLAD! Zly wybor. Zrestartuj program");
+    System.out.println("\nBLAD! Zly wybor. \n");
+
   }
 
   /*
@@ -151,7 +154,7 @@ public class Zad4Main {
 
 
   }
- public static String back()
+ public static void Back()
  {
      System.out.print("Dodać ponownie użytkonika (Y/N) : ");  // ask the input from user
      String var = readUserInput();
@@ -159,7 +162,7 @@ public class Zad4Main {
          System.out.println("Koniec pracy!");
          System.exit(0);
      }
-     return var;
+
  }
   /*
     Metoda proszaca o podanie username i password uzytkownika.
