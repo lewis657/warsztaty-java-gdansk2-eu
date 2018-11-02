@@ -56,7 +56,8 @@ public class Zad4Main {
         //Wypisanie tablicy uzytkownikow na ekran
         printUsersFromArray(userArray);
         //Zerwanie switch
-          printSuccess();
+         // printSuccess();
+          start();
         break;
 
       }
@@ -107,7 +108,7 @@ public class Zad4Main {
    */
   private static void printMenu() {
 
-    System.out.println("========== MENU ==========");
+    System.out.println("\n========== MENU ==========");
     System.out.println("1.\t Dodaj uzytkownika.");
     System.out.println("2.\t Wyświetl uzytkowników.");
     System.out.println("0.\t Koniec programu.");
