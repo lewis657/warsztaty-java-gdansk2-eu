@@ -14,10 +14,10 @@ public class Zad4Main {
   public static void main(String[] args) throws IOException {
 
 
-      Start();
+      start();
   }
 
-    public static void Start() throws IOException
+    public static void start() throws IOException
     {
 
         printMenu();
@@ -40,7 +40,7 @@ public class Zad4Main {
         //Zapisz usera do pliku
         saveToFile(user);
         //Wypisz informacje o poprawnie wykonanej operacji
-          Back();
+          back();
 
         printSuccess();
 
@@ -68,7 +68,7 @@ public class Zad4Main {
       //Jesli uzytkownik wybierze cokolwiek innego
       default: {
         printError();
-          Start();
+          start();
         break;
       }
     }
@@ -121,7 +121,7 @@ public class Zad4Main {
   private static void printSuccess() throws IOException {
 
     System.out.println("\nDODANO POPRAWNIE!\n");
-      Start();
+      start();
 
   }
 
@@ -154,7 +154,7 @@ public class Zad4Main {
 
 
   }
- public static void Back()
+ public static void back()
  {
      System.out.print("Dodać ponownie użytkonika (Y/N) : ");  // ask the input from user
      String var = readUserInput();
