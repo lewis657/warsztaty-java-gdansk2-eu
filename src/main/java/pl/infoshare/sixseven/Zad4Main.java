@@ -40,9 +40,10 @@ public class Zad4Main {
         //Zapisz usera do pliku
         saveToFile(user);
         //Wypisz informacje o poprawnie wykonanej operacji
-          back();
+
 
         printSuccess();
+          back();
 
         //Zerwanie switch
         break;
@@ -62,7 +63,7 @@ public class Zad4Main {
 
       }
         case "0": {
-            System.out.println("Wybarałeś zakończenie programu");
+            System.out.println("Wybarałeś zakończenie programu!");
             System.exit(0);
         }
 
@@ -119,10 +120,10 @@ public class Zad4Main {
   /*
     Metoda do wypisywania informacji o poprawnie wykonanej operacji
    */
-  private static void printSuccess() throws IOException {
+  private static void printSuccess()  {
 
     System.out.println("\nDODANO POPRAWNIE!\n");
-      start();
+
 
   }
 
@@ -155,13 +156,16 @@ public class Zad4Main {
 
 
   }
- public static void back()
- {
-     System.out.print("Dodać ponownie użytkonika (Y/N) : ");  // ask the input from user
+ public static void back() throws IOException {
+     System.out.print("Dodać kolejnego użytkonika? (Y/N) : ");  // ask the input from user
      String var = readUserInput();
      if(var.equalsIgnoreCase("N")){
-         System.out.println("Koniec pracy!");
-         System.exit(0);
+         System.out.println("\nKoniec dodawania!\n");
+         start();
+     }
+     else
+     {
+         handleUserChoice("1");
      }
 
  }
