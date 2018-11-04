@@ -15,12 +15,7 @@ public class Zad6dom {
 
   public static void main(String[] args) throws Exception {
 
-      byte[] message = "hello world".getBytes(StandardCharsets.UTF_8);
-      String encoded = Base64.getEncoder().encodeToString(message);
-      System.out.println(encoded);
-      byte[] decoded = Base64.getDecoder().decode("aGVsbG8gd29ybGQ=");
-      System.out.println(new String(decoded, StandardCharsets.UTF_8));
-// => hello world
+
      startProgram();
 
 
@@ -100,7 +95,7 @@ public class Zad6dom {
 
 
         //System.out.println("Username: " + user.getUsername() + "\t" + "Password: " + user.getPassword()+ "\t" + "Typ: " + user.getType());
-     // System.out.println("Username: " + Base64.getDecoder().decode(new String(user.getUsername()).getBytes(StandardCharsets.UTF_8)) + "\t" + "Password: " + Base64.getDecoder().decode(new String(user.getPassword()).getBytes(StandardCharsets.UTF_8))+ "\t" + "Typ: " + Base64.getDecoder().decode(new String(user.getType()).getBytes(StandardCharsets.UTF_8)));
+      System.out.println("Username: " + getBase64DecodedCipherText(user.getUsername()) + "\t" + "Password: " + getBase64DecodedCipherText(user.getPassword())+ "\t" + "Typ: " + getBase64DecodedCipherText(user.getType()));
     }
   }
 
@@ -112,11 +107,7 @@ public class Zad6dom {
 
 
     for (int i = 0; i < userArray.length; i++) {
-
-
       userArray[i] = generateUserFromFileInput(linesFromFile.get(i));
-        System.out.println(userArray[i]);
-
     }
     return userArray;
   }
@@ -147,9 +138,7 @@ public class Zad6dom {
     Metoda do wypisywania informacji o poprawnie wykonanej operacji
    */
   private static void printSuccess()  {
-
     System.out.println("\nDODANO POPRAWNIE!\n");
-
 
   }
 
@@ -175,20 +164,31 @@ public class Zad6dom {
    */
   private static void saveToFile(User... users) throws Exception {
     for (User user : users) {
-        //String strKey ="klucz";
-            String line = Base64.getEncoder().encode(user.getUsername().getBytes(StandardCharsets.UTF_8)) + ";" + Base64.getEncoder().encode(user.getPassword().getBytes(StandardCharsets.UTF_8)) + ";" + Base64.getEncoder().encode(user.getType().getBytes(StandardCharsets.UTF_8)) + "\n";
-
+            String line = getBase64EncodedCipherText(user.getUsername()) + ";" + getBase64EncodedCipherText(user.getPassword()) + ";" +getBase64EncodedCipherText(user.getType()) + "\n";
             Files.write(Paths.get("./zad3.txt"), line.getBytes(), StandardOpenOption.APPEND);
         }
 
 
 
   }
+    /*
+      Metoda szyfrująca
+     */
+    static String getBase64EncodedCipherText(String cipherText) {
+        byte[] cText = cipherText.getBytes();
+        return Base64.getEncoder().encodeToString(cText);
+    }
+    /*
+      Metoda deszyfrująca
+     */
+    static String getBase64DecodedCipherText(String encodedCipherText) throws IOException {
+        return new String((Base64.getDecoder().decode(encodedCipherText)));
+    }
 
 
 
  public static void backToMenu() throws Exception {
-     System.out.print("Dodać kolejnego użytkonika? (Y/N) : ");  // ask the input from user
+     System.out.print("Dodać kolejnego użytkonika? (Y/N) : ");
      String var = readUserInput();
      if(var.equalsIgnoreCase("N")){
          System.out.println("\nKoniec dodawania!\n");
@@ -200,24 +200,6 @@ public class Zad6dom {
      }
 
  }
-// public static void  checkType(String field ) throws IOException {
-//
-//
-//     if (field.equalsIgnoreCase("type"))
-//     {
-//         checkScanner(readUserInput());
-//     }
-//
-// }
-// public static void  checkScanner(String scanner) throws IOException {
-//
-//
-//     if (scanner.equalsIgnoreCase("Admin"))
-//     {
-//         System.out.println("dupa");
-//     }
-//
-// }
   /*
     Metoda proszaca o podanie username i password uzytkownika.
    */
