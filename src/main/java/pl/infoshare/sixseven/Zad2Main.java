@@ -33,7 +33,7 @@ public class Zad2Main {
 
     private static User generateUserFromFileInput(String lineFromFile){
         String[] userSplitted = lineFromFile.split(";");
-        return new User(userSplitted[0], userSplitted[1]);
+        return new User(userSplitted[0], userSplitted[1],userSplitted[2]);
     }
 
     private static void saveToFile(User... users) throws FileNotFoundException {
@@ -45,7 +45,7 @@ public class Zad2Main {
     }
 
     private static User generateUserFromUserInput(){
-        return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"));
+        return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"),getFieldFromUserInput("type"));
     }
 
     private static String getFieldFromUserInput(String field){

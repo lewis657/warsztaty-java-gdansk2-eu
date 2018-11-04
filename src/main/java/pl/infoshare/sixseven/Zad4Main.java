@@ -14,10 +14,10 @@ public class Zad4Main {
   public static void main(String[] args) throws IOException {
 
 
-      start();
+      startProgram();
   }
 
-    public static void start() throws IOException
+    public static void startProgram() throws IOException
     {
 
         printMenu();
@@ -35,18 +35,23 @@ public class Zad4Main {
     switch (choice) {
       //Jesli uzytkownik wybierze 1
       case "1": {
-        //Wywolaj metode, ktora poprosi o username i password i przypisz nowy obiekt do zmiennej
-        User user = generateUserFromUserInput();
-        //Zapisz usera do pliku
-        saveToFile(user);
-        //Wypisz informacje o poprawnie wykonanej operacji
+
+          User user = generateUserFromUserInput();
+        //  System.out.println(user.getType());
+          if (user.getType().equalsIgnoreCase("ADMIN") || user.getType().equalsIgnoreCase("USER")){
+
+              saveToFile(user);
+              printSuccess();
+              backToMenu();
+          }
+          else
+          {
+              System.out.println("Error Type! (Admin/User)");
+              handleUserChoice("1");
+          }
 
 
-        printSuccess();
-          back();
-
-        //Zerwanie switch
-        break;
+          break;
       }
       //Jesli uzytkownik wybierze 2
       case "2": {
@@ -58,7 +63,7 @@ public class Zad4Main {
         printUsersFromArray(userArray);
         //Zerwanie switch
          // printSuccess();
-          start();
+          startProgram();
         break;
 
       }
@@ -70,7 +75,7 @@ public class Zad4Main {
       //Jesli uzytkownik wybierze cokolwiek innego
       default: {
         printError();
-          start();
+          startProgram();
         break;
       }
     }
@@ -81,7 +86,7 @@ public class Zad4Main {
    */
   private static void printUsersFromArray(User[] userArray) {
     for (User user : userArray) {
-      System.out.println("Username: " + user.getUsername() + "\t" + "Password: " + user.getPassword());
+      System.out.println("Username: " + user.getUsername() + "\t" + "Password: " + user.getPassword()+ "\t" + "Typ: " + user.getType());
     }
   }
 
@@ -140,7 +145,8 @@ public class Zad4Main {
    */
   private static User generateUserFromFileInput(String lineFromFile) {
     String[] userSplitted = lineFromFile.split(";");
-    return new User(userSplitted[0], userSplitted[1]);
+
+    return new User(userSplitted[0], userSplitted[1],userSplitted[2]);
   }
 
   /*
@@ -148,20 +154,21 @@ public class Zad4Main {
    */
   private static void saveToFile(User... users) throws IOException {
     for (User user : users) {
-      String line = user.getUsername() + ";" + user.getPassword() + "\n";
-      //Dopisanie do pliku tekstu z uzytkownikiem
-      Files.write(Paths.get("./zad3.txt"), line.getBytes(), StandardOpenOption.APPEND);
 
-    }
+            String line = user.getUsername() + ";" + user.getPassword() + ";" + user.getType() + "\n";
+            //Dopisanie do pliku tekstu z uzytkownikiem
+            Files.write(Paths.get("./zad3.txt"), line.getBytes(), StandardOpenOption.APPEND);
+        }
+
 
 
   }
- public static void back() throws IOException {
+ public static void backToMenu() throws IOException {
      System.out.print("Dodać kolejnego użytkonika? (Y/N) : ");  // ask the input from user
      String var = readUserInput();
      if(var.equalsIgnoreCase("N")){
          System.out.println("\nKoniec dodawania!\n");
-         start();
+         startProgram();
      }
      else
      {
@@ -169,18 +176,37 @@ public class Zad4Main {
      }
 
  }
+// public static void  checkType(String field ) throws IOException {
+//
+//
+//     if (field.equalsIgnoreCase("type"))
+//     {
+//         checkScanner(readUserInput());
+//     }
+//
+// }
+// public static void  checkScanner(String scanner) throws IOException {
+//
+//
+//     if (scanner.equalsIgnoreCase("Admin"))
+//     {
+//         System.out.println("dupa");
+//     }
+//
+// }
   /*
     Metoda proszaca o podanie username i password uzytkownika.
    */
-  private static User generateUserFromUserInput() {
-    return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"));
+  public static User generateUserFromUserInput() throws IOException{
+    return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"),getFieldFromUserInput("type"));
   }
 
   /*
     Metoda wczytujaca pojedyncza informacje od uzytkownika i zwracajaca to co wpisal uzytkownik
    */
-  private static String getFieldFromUserInput(String field) {
+  private static String getFieldFromUserInput(String field)  {
     System.out.print("Provide " + field + ": ");
+//      checkType(field);
     return readUserInput();
   }
 

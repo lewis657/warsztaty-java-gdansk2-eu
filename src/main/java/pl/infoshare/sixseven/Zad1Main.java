@@ -13,10 +13,12 @@ public class Zad1Main {
 
         System.out.print("Provide password: ");
         String password = readUserInput();
+        System.out.print("Podaj typ: ");
+        String typ = readUserInput();
 
-        User user = new User(username, password);
+        User user = new User(username, password, typ);
 
-        System.out.println("Stworzono uzytkownika " + user.getUsername() + "\t\t" + "O hasle: " + user.getPassword());
+        System.out.println("Stworzono uzytkownika " + user.getUsername() + "\t\t" + "O hasle: " + user.getPassword()+ "\t\t" + "Typ: " + user.getType());
     }
 
     private static String readUserInput(){

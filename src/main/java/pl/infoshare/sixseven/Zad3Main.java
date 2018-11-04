@@ -116,7 +116,7 @@ public class Zad3Main {
    */
   private static User generateUserFromFileInput(String lineFromFile) {
     String[] userSplitted = lineFromFile.split(";");
-    return new User(userSplitted[0], userSplitted[1]);
+    return new User(userSplitted[0], userSplitted[1],userSplitted[2]);
   }
 
   /*
@@ -134,7 +134,7 @@ public class Zad3Main {
     Metoda proszaca o podanie username i password uzytkownika.
    */
   private static User generateUserFromUserInput() {
-    return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"));
+    return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"),getFieldFromUserInput("type"));
   }
 
   /*
