@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) {
         //Osoba osoba = new Osoba("10","M");
 
-        
+
 
     }
 }

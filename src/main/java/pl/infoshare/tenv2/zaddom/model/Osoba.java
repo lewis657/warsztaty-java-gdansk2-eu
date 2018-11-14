@@ -37,4 +37,6 @@ public class Osoba {
         this.rok = rok;
         this.plec = plec;
     }
+
+
 }
